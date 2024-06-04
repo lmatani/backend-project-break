@@ -1,0 +1,90 @@
+
+body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+    color: black;
+    background-color: #e0d6d698;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+/* BARRA NAVEGACION */
+header {
+    background-color:#000000c4;
+    width: 100%;
+    height: 50px;
+    margin-top: 0;
+    border: 1px solid #000000c4;
+}
+
+.menu-bar ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    gap: 30px;
+
+}
+.menu-bar a {
+    color: #ffffff;
+    font-size: 14px;
+    padding: 5px;
+    letter-spacing: 0.3px;
+}
+
+a:hover {
+    color: #9e9491;
+    transition: opacity .15s ease-in;
+}
+
+.sec-central {
+    margin-top: 10px;
+    color: #000000f1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    gap: 20px;
+    padding: 10px;
+
+}
+
+.product-card {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 4px;
+    gap: 10px;
+    padding: 20px;
+    margin-left: 10px;
+}
+
+.product-card img{
+    width: 130px;
+    height: 100px;
+    padding-bottom: 10px;
+}
+
+.product-card h3{
+    font-weight: 600;
+}
+
+#detalle-producto, #volver-ppal{
+    background-color: #4340eef3;
+    color: #fffffff8;
+    border-radius: 4px;
+    width: 100%;
+    height: 20px;
+    padding: 7px;
+}

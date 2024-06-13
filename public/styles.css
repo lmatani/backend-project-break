@@ -41,7 +41,7 @@ header {
 }
 
 a:hover {
-    color: #9e9491;
+    color: #ffbb01;
     transition: opacity .15s ease-in;
 }
 
@@ -66,8 +66,13 @@ a:hover {
     align-items: center;
     border-radius: 4px;
     gap: 10px;
-    padding: 20px;
+    padding: 10px;
     margin-left: 10px;
+    width: 150px;
+}
+
+.product-card-detail {
+    width: 400px;
 }
 
 .product-card img{
@@ -80,11 +85,32 @@ a:hover {
     font-weight: 600;
 }
 
-#detalle-producto, #volver-ppal{
+.product-card-detail p{
+    margin: 5px;
+}
+
+.product-card-detail p:nth-last-child(2) {
+    padding-bottom: 30px; 
+}
+
+.product-card span{
+    font-weight: bold;
+}
+
+.product-card-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 4px;
+    gap: 30px;
+    padding: 20px;
+}
+
+.button{
     background-color: #4340eef3;
     color: #fffffff8;
     border-radius: 4px;
-    width: 100%;
+    width: 140px;
     height: 20px;
     padding: 7px;
 }

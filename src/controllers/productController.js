@@ -1,101 +1,129 @@
-// Archivo que contendrá la lógica para manejar las solicitudes CRUD de los productos. 
-//Devolverá las respuestas en formato HTML.
-const Product = require('../models/Product');
-const views = require('./productView.js');
+const { Product } = require('../models/Product');
+const views = require('../views/productView.js');
 
+// #region METODOS MOSTRAR CATALOGO
 const showProducts = async (req, res) => {
 	const products = await Product.find();
-    //console.log( {products});
+	const isDashboard = (req.route.path.indexOf("dashboard") !== -1) ? true : false;
 
     if (!products || products.length === 0)
-		return res.status(404).send(views.getWithoutProducts('No hay productos en el catálogo.'));
+		return res.status(404).send(views.getWithoutProducts('No hay productos en el catálogo.', isDashboard));
     
-	res.status(200).send(views.getListProducts(products));
+	res.status(200).send(views.getListProducts(products, isDashboard));
+} 
+
+
+const showProductsByCategory = async (req, res) => {
+	const category = req.params.category;
+	console.log( category);
+	const isDashboard = (req.route.path.indexOf("dashboard") !== -1) ? true : false;
+	
+	const products = await Product.find({ category: `${category}`}).exec();
+
+    if (!products || products.length === 0)
+		return res.status(404).send(views.getWithoutProducts('No hay productos en el catálogo de esa categoría.', isDashboard));
+    
+	res.status(200).send(views.getListProducts(products, isDashboard));
 }
 
 const showProductById = async (req, res) => {
 	const  productId   = req.params.productId;
 	console.log( req.params);
+
+	const isDashboard = (req.route.path.indexOf("dashboard") !== -1) ? true : false;
+
 	const product = await Product.findById(productId);
 
 	if (!product)
-		return res.status(404).send(views.getWithoutProducts('No existe el producto en el catálogo.' ));
+		return res.status(404).send(views.getWithoutProducts('No existe el producto en el catálogo.', isDashboard));
 
-	res.status(200).send(views.getInfoProduct(product));
+	res.status(200).send(views.getInfoProduct(product, isDashboard));
 }
+// #endregion
 
-const showProductsByCategory = async (req, res) => {
-  const category = req.params.category;
-  console.log( category);
-	const products = await Product.find({ category: `${category}`}).exec();;
 
-    if (!products || products.length === 0)
-		return res.status(404).send(views.getWithoutProducts('No hay productos en el catálogo de esa categoría.'));
-    
-	res.status(200).send(views.getListProducts(products));
-}
+// #region METODOS DASHBOARD 
 
-const showProductsDashboard = async (req, res) => {
-	const products = await Product.find();
-
-    if (!products || products.length === 0)
-		return res.status(404).send(views.getWithoutProducts('No hay productos en el catálogo.'));
-    
-	res.status(200).send(views.getListProducts(products));
-} 
 
 const createProduct = async (req, res) => {
     console.log(req.body);
-    if(!req.body) 
+    if (!req.body) 
       return res.status(400).send({
           error: 'Los datos para crear el producto son incorrectos. Intentalo de nuevo!'
       });
-  
+	
+	const isDashboard = (req.route.path.indexOf("dashboard") !== -1) ? true : false;
 
 	const newProduct = await Product.create(req.body);
-	if (!newProduct || newProduct === undefined || newProduct === null)
-		return res.status(404).send(views.getWithoutProducts('No se ha podido dar de alta el producto.'));
+	if (!newProduct)
+		return res.status(404).send(views.getWithoutProducts('No se ha podido dar de alta el producto.', isDashboard));
 
-  res.status(201).redirect('/dashboard');
+	res.redirect(201, '/dashboard');
 }
 
 const updateProduct = async (req, res) => {
+
+console.log('entro por el putttt');
+
 	const  productId   = req.params.productId;
+	const isDashboard = (req.route.path.indexOf("dashboard") !== -1) ? true : false;
 
 	const updateProduct = await Product.findByIdAndUpdate(productId, req.body, {
 		new: true,
 	});
 
 	if (!updateProduct)
-		return res.status(404).send(views.getWithoutProducts('No ha sido posible la actualización.' ));
+		return res.status(404).send(views.getWithoutProducts('No ha sido posible la actualización.', isDashboard));
 
-  res.redirect('/dashboard');
+	res.redirect(200, '/dashboard');
 }
 
 const deleteProduct = async (req, res) => {
 	const  productId   = req.params.productId;
+	console.log('entro por deleteeeeee');
+	const isDashboard = (req.route.path.indexOf("dashboard") !== -1) ? true : false;
 
-	const deletedProduct = await Product.findByIdAndDelete(productId)
+	const deletedProduct = await Product.findByIdAndDelete(productId);
 
 	if (!deletedProduct)
-    return res.status(404).send(views.getWithoutProducts('No ha sido posible la actualización.' ));
+    	return res.status(404).send(views.getWithoutProducts('No ha sido posible la actualización.', isDashboard));
 
-  res.redirect('/dashboard');
+	res.redirect(200, '/dashboard');
 }
 
 const showNewProduct = async (req, res) => {
-	res.status(200).send(views.getWithoutProducts('Método pendiente de implementar'));
-} 
-const showEditProduct = async (req, res) => {    
-	res.status(200).send(views.getWithoutProducts('Método pendiente de implementar'));
+	const product = {
+        name: '',
+        description: '',
+        image: '',
+        category: '',
+        size: '',
+        price: ''
+    };
+	res.status(200).send(views.getNewEditProduct(product, '/dashboard'));
+
+	//res.status(200).send(views.getWithoutProducts('Método pendiente de implementar!'));
 } 
 
+const showEditProduct = async (req, res) => {  
+	const  productId   = req.params.productId;
+	console.log( req.params);
+
+	const product = await Product.findById(productId);
+
+	if (!product)
+		return res.status(404).send(views.getWithoutProducts('No existe el producto en el catálogo.', true));
+
+	res.status(200).send(views.getNewEditProduct(product,`/dashboard/${productId}`));  
+	//res.status(200).send(views.getWithoutProducts('Método pendiente de implementar!'));
+} 
+
+// #endregion
 
 module.exports = {
 	showProducts,
     showProductById,
     showProductsByCategory,
-    showProductsDashboard,
     createProduct,
     updateProduct,
     deleteProduct,

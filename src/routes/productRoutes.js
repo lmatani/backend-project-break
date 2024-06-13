@@ -1,39 +1,43 @@
+
 const express = require("express");
 const router = express.Router();
 
-const Product = require('../models/Product');
+const { productValidationSchema } = require('../models/Product');
+const validate = require('../middlewares/validate');
+const checkObjectIdParam = require('../middlewares/checkObjectIdParam');
 
 const {
 	showProducts,
     showProductById,
     showProductsByCategory,
-    showProductsDashboard,
     createProduct,
     updateProduct,
     deleteProduct,
     showNewProduct,
     showEditProduct,
-
 } = require('../controllers/productController');
+
 
 router.get('/products', showProducts);
 
-router.get('/products/:productId', showProductById);
+router.get('/products/:productId', checkObjectIdParam('productId'), validate, showProductById);
 
 router.get('/products/category/:category', showProductsByCategory);
 
-router.get('/dashboard', showProductsDashboard);
+router.get('/dashboard', showProducts);
+
+router.get('/dashboard/category/:category', showProductsByCategory);
 
 router.get('/dashboard/new', showNewProduct);
 
-router.post('/dashboard', createProduct);
+router.post('/dashboard', productValidationSchema, validate, createProduct);
 
-router.get('/dashboard/:productId/edit', showEditProduct);
+router.get('/dashboard/:productId', checkObjectIdParam('productId'),  validate, showProductById);
 
-router.get('/dashboard/:productId', showProductById);
+router.get('/dashboard/:productId/edit', checkObjectIdParam('productId'),  validate, showEditProduct);
 
-router.put('/dashboard/:productId', updateProduct);
+router.put('/dashboard/:productId', checkObjectIdParam('productId'), productValidationSchema, validate, updateProduct);
 
-router.delete('/dashboard/:productId', deleteProduct);
+router.delete('/dashboard/:productId', checkObjectIdParam('productId'), validate, deleteProduct);
 
 module.exports = router;

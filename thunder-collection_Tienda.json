@@ -1,0 +1,143 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Tienda",
+    "collectionId": "60ff48af-afd1-4a71-83c0-bb2352a46421",
+    "dateExported": "2024-06-05T07:11:43.556Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "9343f4ef-f5b8-41da-9106-3c725f2f3f5c",
+            "colId": "60ff48af-afd1-4a71-83c0-bb2352a46421",
+            "containerId": "",
+            "name": "showProducts",
+            "url": "http://localhost:8080/products",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-06-03T09:40:52.165Z",
+            "modified": "2024-06-03T09:49:50.419Z",
+            "headers": []
+        },
+        {
+            "_id": "482b150c-db9f-4d58-88fa-1e5052ff92be",
+            "colId": "60ff48af-afd1-4a71-83c0-bb2352a46421",
+            "containerId": "",
+            "name": "showProductsById",
+            "url": "http://localhost:8080/products/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-06-03T10:01:38.040Z",
+            "modified": "2024-06-03T10:01:58.299Z",
+            "headers": []
+        },
+        {
+            "_id": "3d32ae7f-0b66-4bbc-a1d4-212d8de022a9",
+            "colId": "60ff48af-afd1-4a71-83c0-bb2352a46421",
+            "containerId": "",
+            "name": "Dashboard_showProducts",
+            "url": "http://localhost:8080/dashboard",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-06-03T18:08:10.706Z",
+            "modified": "2024-06-03T18:08:40.208Z",
+            "headers": []
+        },
+        {
+            "_id": "f9d33958-3c34-4ceb-839f-272a41a79f88",
+            "colId": "60ff48af-afd1-4a71-83c0-bb2352a46421",
+            "containerId": "",
+            "name": "showProductsByCategory",
+            "url": "http://localhost:8080/products/category/Camisetas",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-06-03T15:20:08.479Z",
+            "modified": "2024-06-03T15:20:33.963Z",
+            "headers": []
+        },
+        {
+            "_id": "b76d3211-8a05-4c64-93ab-4f599ed09cf9",
+            "colId": "60ff48af-afd1-4a71-83c0-bb2352a46421",
+            "containerId": "",
+            "name": "createProduct",
+            "url": "http://localhost:8080/dashboard",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2024-06-03T15:23:55.574Z",
+            "modified": "2024-06-05T07:10:40.439Z",
+            "headers": [
+                {
+                    "name": "key",
+                    "value": "Content-Type",
+                    "isDisabled": true
+                },
+                {
+                    "name": "value",
+                    "value": "application/json",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Pantalones con clase\",\n  \"description\": \"Pantalones para ir a clase\",\n  \"image\": \"pantalones01.jpg\",\n  \"category\": \"Pantalones  \",\n  \"size\": \"XL\",\n  \"price\": 18\n}\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "81df6e02-7a96-44e6-862f-ccad0b1dd1d2",
+            "colId": "60ff48af-afd1-4a71-83c0-bb2352a46421",
+            "containerId": "",
+            "name": "deleteProduct",
+            "url": "http://localhost:8080/dashboard/665ed90c5c66e46ef6c4d72f",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2024-06-04T13:06:47.946Z",
+            "modified": "2024-06-04T13:07:43.054Z",
+            "headers": [
+                {
+                    "name": "key",
+                    "value": "Content-Type",
+                    "isDisabled": true
+                },
+                {
+                    "name": "value",
+                    "value": "application/json",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Camisetas con clase\",\n  \"description\": \"Camisetas para ir a clase\",\n  \"image\": \"pantalones01.jpg\",\n  \"category\": \"Camisetas\",\n  \"size\": \"S\",\n  \"price\": 20.99\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "589d4f11-3113-49fe-a10e-bc13200aac4c",
+            "colId": "60ff48af-afd1-4a71-83c0-bb2352a46421",
+            "containerId": "",
+            "name": "updateProduct",
+            "url": "http://localhost:8080/dashboard/665ed90c5c66e46ef6c4d72d",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2024-06-04T13:06:51.000Z",
+            "modified": "2024-06-04T13:08:30.091Z",
+            "headers": [
+                {
+                    "name": "key",
+                    "value": "Content-Type",
+                    "isDisabled": true
+                },
+                {
+                    "name": "value",
+                    "value": "application/json",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Camisetas modificado\",\n  \"description\": \"Camisetas para ir a clase modificado\",\n  \"image\": \"pantalones01.jpg\",\n  \"category\": \"Camisetas\",\n  \"size\": \"M\",\n  \"price\": 99.99\n}",
+                "form": []
+            }
+        }
+    ],
+    "ref": "zCD0BalJmxe4tbmcUjIjcPEGE6-1Mv08AVWaDFCkG_B9ugXykt9yccsm9BJ8trgrdHWBA1JYMjId6iyKNYNT9A"
+}

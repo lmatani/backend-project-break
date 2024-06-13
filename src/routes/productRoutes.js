@@ -15,6 +15,7 @@ const {
     deleteProduct,
     showNewProduct,
     showEditProduct,
+    showAccessLogin,
 } = require('../controllers/productController');
 
 

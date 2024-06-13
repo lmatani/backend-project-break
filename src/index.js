@@ -5,6 +5,9 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+const config = require('./config/firebase.js');
+config.app;
+
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -16,6 +19,8 @@ dbConnection();
 
 const routes = require('./routes/productRoutes');
 app.use('/', routes);
+const auth = require('./routes/authRoutes');
+app.use('/', auth);
 app.use(require('./middlewares/errors'));
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

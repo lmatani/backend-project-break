@@ -20,20 +20,17 @@ buttonList.forEach((elemento) => {
     
         const dataProduct = getDataProduct();
         const confirmation = confirm('Se va a modificar el producto ¿Deseas continuar?');
-        if (!confirmation) {
-            return;
+        if (confirmation) {
+            editProduct(linkProduct, dataProduct, 'PUT');
         }
-    
-        editProduct(linkProduct, dataProduct, 'PUT');
+        
     }
     if (elemento.id === 'product-eliminar') {
         event.preventDefault();  
         const confirmation = confirm('Se va a eliminar el producto ¿Deseas continuar?');
-        if (!confirmation) {
-            return;
+        if (confirmation) {
+            deleteProduct(elemento.getAttribute('href'));
         }
-
-        deleteProduct(elemento.getAttribute('href'));
     }
     if (elemento.id === 'product-Cancel') {
         event.preventDefault();  

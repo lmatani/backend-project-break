@@ -17,30 +17,46 @@ function baseHtml(header, body) {
         ${body}   
       </section>
       <script src="/js/script.js"></script>
+      <script src="/js/user.js"></script>
       </body>
       </html>
     `;
   return html;
 }
 
-function getNavBar(dashboard) {
-  const route = (dashboard === true) ? 'dashboard' : 'products';
+function getNavBar() {
   const navHtml = `
     <nav class="menu-bar">
         <ul>
           <li><a href="/products">Productos</a></li>
-          <li><a href="/${route}/category/Camisetas">Camisetas</a></li>
-          <li><a href="/${route}/category/Pantalones">Pantalones</a></li>
-          <li><a href="/${route}/category/Zapatos">Zapatos</a></li>
-          <li><a href="/${route}/category/Accesorios">Accesorios</a></li>
-          <li><a href="/dashboard/new">Nuevo Producto</a></li>
-          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/products/category/Camisetas">Camisetas</a></li>
+          <li><a href="/products/category/Pantalones">Pantalones</a></li>
+          <li><a href="/products/category/Zapatos">Zapatos</a></li>
+          <li><a href="/products/category/Accesorios">Accesorios</a></li>
+          <li><a href="/access">Login</a></li>
         </ul>
     </nav>
     `;
   return navHtml;
 }
 
+function getNavBarDashboard() {
+  //const route = (dashboard === true) ? 'dashboard' : 'products';
+  const navHtml = `
+    <nav class="menu-bar">
+        <ul>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/dashboard/category/Camisetas">Camisetas</a></li>
+          <li><a href="/dashboard/category/Pantalones">Pantalones</a></li>
+          <li><a href="/dashboard/category/Zapatos">Zapatos</a></li>
+          <li><a href="/dashboard/category/Accesorios">Accesorios</a></li>
+          <li><a href="/dashboard/new">Nuevo Producto</a></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+    `;
+  return navHtml;
+}
 
 function getDetailProduct(product) {
   const detailProduct = `
@@ -55,6 +71,28 @@ function getDetailProduct(product) {
 }
 
 // #endregion
+
+//#region FUNCIONES USUARIO
+function getUserHtml(action){
+  const loginForm = `
+  <!--form action="/login" method="post"-->
+  <form id="form-user" action="${action}" method="post">
+  <h3>Acceso de Usuarios</h3><br>
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" required>
+    <label for="password">Contraseña:</label>
+    <input type="password" id="password" name="password" required>
+    <div class="user-links">
+      <button class="button button-user-form" id="sing-in" type="submit">Iniciar sesión</button>
+      <button class="button button-user-form" id="sing-up" type="submit">Registrarse</button>
+      <button class="button button-user-form" id="back-main" type="submit">Volver</a>
+    </div>
+  </form>
+  `;
+  return loginForm;
+}
+// #endregion 
+
 
 
 // #region FUNCIONES CATALOGO
@@ -85,6 +123,7 @@ function getProductCard(product) {
   
   return productCard;
 }
+// #endregion
 
 // #region FUNCIONES DASHBOARD
 
@@ -161,30 +200,35 @@ function getFormProduct(product,action) {
 
 // #region FUNCIONES PUBLICAS
 function getListProducts(products, dashboard) {
-  const navBar = getNavBar(dashboard);
+  const navBar = (dashboard === true) ? getNavBarDashboard() : getNavBar();
   const body = (dashboard === true) ? getProductListDashboard(products) : getProductList(products);
   const webPage = baseHtml(navBar, body);
-
   return webPage;
 }
 
 function getInfoProduct(product, dashboard) {
-  const navBar = getNavBar(dashboard);
+  const navBar = (dashboard === true) ? getNavBarDashboard() : getNavBar();
   const body = (dashboard === true) ? getProductCardDashboard(product) : getProductCard(product);
   const webPage = baseHtml(navBar, body);
-
   return webPage;
 }
 
 function getNewEditProduct(product, action) {
-  const navBar = getNavBar(true);
+  const navBar = getNavBarDashboard();
   const body = getFormProduct(product, action);
   const webPage = baseHtml(navBar, body);
   return webPage;
 }
 
+function getUserAccess(action) {
+  const navBar = getNavBar();
+  const body = getUserHtml(action);
+  const webPage = baseHtml(navBar, body);
+  return webPage;
+}
+
 function getWithoutProducts(mensage, dashboard){
-  const navBar = getNavBar(dashboard);
+  const navBar = (dashboard === true) ? getNavBarDashboard() : getNavBar();
   const webPage = baseHtml(navBar, mensage);
   return webPage;
 }
@@ -196,4 +240,5 @@ module.exports = {
   getInfoProduct,
   getWithoutProducts,
   getNewEditProduct,
+  getUserAccess,
 }

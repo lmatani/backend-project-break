@@ -143,3 +143,35 @@ a:hover {
     margin: 12px;
 }
 
+#form-user{
+    border-radius: 10px;
+    background-color: #ffffffef;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 4px;
+    width: 90%;
+    padding: 6px;
+    max-width: 350px;
+}
+
+#form-user h3, label {
+    padding-left: 15px;
+}
+
+.user-links {
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 6px;
+    width: 96%;
+}
+
+.button-user-form {
+    border: none;
+    height: 30px;
+    width: 100%;
+}

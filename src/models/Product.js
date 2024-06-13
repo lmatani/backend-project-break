@@ -31,24 +31,24 @@ const Product = mongoose.model('Product', ProductSchema);
 
 const productValidationSchema = [
 	body('name')
-    .notEmpty().withMessage('Name is required')
-    .isString().withMessage('Name must be a string'),
+    .notEmpty().withMessage('El nombre es un valor obligatorio')
+    .isString().withMessage('El nombre debe ser un texto'),
   body('description')
-    .isString().withMessage('Description must be a string'),
+    .isString().withMessage('La descripción debe ser un texto'),
   body('image')
-    .notEmpty().withMessage('Image is required')
-    .isString().withMessage('Image must be a string'),
+    .notEmpty().withMessage('El campo imagen es un valor obligatorio')
+    .isString().withMessage('La imagen debe ser un texto'),
   body('category')
-    .notEmpty().withMessage('Category is required')
-    .isString().withMessage('Category must be a string')
+    .notEmpty().withMessage('La categoría es un valor obligatorio')
+    .isString().withMessage('La categoría debe ser un texto')
     .isIn(['Accesorios', 'Camisetas', 'Pantalones', 'Zapatos'])
-    .withMessage('Category must be Accesorios, Camisetas, Pantalones, Zapatos'),
+    .withMessage('La categoría debe coincidir con uno de estos valores: Accesorios, Camisetas, Pantalones, Zapatos'),
   body('size')
-    .isString().withMessage('Size must be a string')
-    .isIn(['XS', 'S', 'M', 'L', 'XL']).withMessage('Size must be XS, S, M, L, XL'),
+    .isString().withMessage('La talla debe ser un texto')
+    .isIn(['XS', 'S', 'M', 'L', 'XL']).withMessage('La talla debe coincidir con uno de estos valores: XS, S, M, L, XL'),
   body('price')
-    .notEmpty().withMessage('Price is required')
-    .isFloat({ gt: 0 }).withMessage('Price must be a number greater than 0'),
+    .notEmpty().withMessage('El precio es un valor obligatorio')
+    .isFloat({ gt: 0 }).withMessage('El precio debe ser mayor que 0'),
 ]
 
 module.exports = {

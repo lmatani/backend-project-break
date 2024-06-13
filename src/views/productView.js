@@ -16,6 +16,7 @@ function baseHtml(header, body) {
       <section class="sec-central">
         ${body}   
       </section>
+      <script src="/js/script.js"></script>
       </body>
       </html>
     `;
@@ -107,8 +108,8 @@ function getProductCardDashboard(product) {
       <div class="product-card product-card-detail">
         ${detailProduct}
         <div class="product-card-links">
-          <a id="product-edit" class="button" href="/dashboard/${product._id}/edit">Editar Producto</a>
-          <a id="product-erase" class="button" data-method="delete" href="/dashboard/${product._id}">Borrar Producto</a>
+          <a id="product-editar" class="button" href="/dashboard/${product._id}/edit">Editar Producto</a>
+          <a id="product-eliminar" class="button" href="/dashboard/${product._id}">Borrar Producto</a>
         </div>
       </div>
     `;
@@ -117,8 +118,12 @@ function getProductCardDashboard(product) {
 }
 
 function getFormProduct(product,action) {
-  const formProduct = `<form id="product-create" action="${action}" method="post">
-    <div>
+  const formProduct = `
+  
+    <form id="form-edit" action="${action}" method="post">
+    <h3>${action} Producto</h3>
+    <div class="form-product" >
+      <input id="productId" name="productId" type="hidden" value="${product._id}" />
         <label for="name">Nombre:</label>
         <input type="text" id="name" name="name" value="${product.name}" required>
         <label for="description">Descripción:</label>
@@ -142,11 +147,11 @@ function getFormProduct(product,action) {
           <option value="XL" ${product.size === "XL" ? "selected" : ""}>XL</option>
         </select>
         <label for="price">Precio:</label>
-        <input type="number" id="price" name="price"  value="${product.price}" required>
+        <input type="number" id="price" name="price" step="0.01" value="${product.price}" required> 
         <div class="product-card-links">
-          <button type="submit">Enviar</button>
-          <button>Cancelar</button>
-        </div>  
+          <button class="button button-form" id="product-${action}" type="submit">${action}</button>
+          <button class="button button-form" id="product-Cancel">Cancelar</button>
+        </div>
     </div>
   </form>`;
   return formProduct;
@@ -175,7 +180,6 @@ function getNewEditProduct(product, action) {
   const navBar = getNavBar(true);
   const body = getFormProduct(product, action);
   const webPage = baseHtml(navBar, body);
-
   return webPage;
 }
 

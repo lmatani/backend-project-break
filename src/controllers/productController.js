@@ -98,11 +98,9 @@ const showNewProduct = async (req, res) => {
         image: '',
         category: '',
         size: '',
-        price: ''
+        price: 0
     };
-	res.status(200).send(views.getNewEditProduct(product, '/dashboard'));
-
-	//res.status(200).send(views.getWithoutProducts('Método pendiente de implementar!'));
+	res.status(200).send(views.getNewEditProduct(product, 'Crear'));
 } 
 
 const showEditProduct = async (req, res) => {  
@@ -114,8 +112,7 @@ const showEditProduct = async (req, res) => {
 	if (!product)
 		return res.status(404).send(views.getWithoutProducts('No existe el producto en el catálogo.', true));
 
-	res.status(200).send(views.getNewEditProduct(product,`/dashboard/${productId}`));  
-	//res.status(200).send(views.getWithoutProducts('Método pendiente de implementar!'));
+	res.status(200).send(views.getNewEditProduct(product, 'Modificar'));
 } 
 
 // #endregion

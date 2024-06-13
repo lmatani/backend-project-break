@@ -175,7 +175,6 @@ function getFormProduct(product,action) {
         <option value="Camisetas" ${product.category === "Camisetas" ? "selected" : ""}>Camisetas</option>
         <option value="Pantalones" ${product.category === "Pantalones" ? "selected" : ""}>Pantalones</option>
         <option value="Zapatos" ${product.category === "Zapatos" ? "selected" : ""}>Zapatos</option>
-
         </select>
         <label for="size">Talla:</label>
         <select id="size" name="size" required>

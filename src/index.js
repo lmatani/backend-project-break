@@ -8,6 +8,17 @@ const PORT = process.env.PORT || 8080;
 const config = require('./config/firebase.js');
 config.app;
 
+const session = require('express-session');
+
+app.use(
+    session({
+      secret: process.env.SECRET_KEY,
+      resave: false,
+      saveUninitialized: true,
+      cookie: { secure: false },
+    })
+  );
+
 // Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

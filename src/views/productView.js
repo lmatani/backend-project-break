@@ -103,7 +103,9 @@ function getProductList(products) {
       <div class="product-card">
         <h3>${product.name}</h3>
         <img src="/images/${product.image}" alt="${product.name}">
+        <div class="product-card-links">
         <a id="show-detail" class="button" href="/products/${product._id}">Ver detalle</a>
+        </div>
       </div>
     `;
   }

@@ -48,7 +48,6 @@ function getDataProduct() {
         size: document.getElementById('size').value,
         price: document.getElementById('price').value 
     };
-    //console.log(dataProduct);
     return dataProduct;
 }
 
@@ -68,7 +67,11 @@ async function editProduct(linkPutProduct, dataProduct, method)
         if (response.ok) {
             alert('Acción realizada correctamente.');
             window.location.href = `/dashboard/category/${dataProduct.category}`;
-        } else {
+        } else if (response.status === 401) {
+            alert('Usuario no autorizado o sesión expirada. Inicie de nuevo la sesión.');
+            window.location.href = '/access';
+        } 
+        else {
             const errorData = await response.text();
             console.log(errorData);
             alert(`${errorData}`);
@@ -92,6 +95,9 @@ async function deleteProduct(linkDeleteProduct)
         if (response.ok) {
             alert('Producto borrado correctamente.');
             window.location.href = '/dashboard';
+        } else if (response.status === 401) {
+            alert('Usuario no autorizado o sesión expirada. Inicie de nuevo la sesión.');
+            window.location.href = '/access';
         } else {
             const errorData = await response.text();
             console.log(errorData);

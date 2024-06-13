@@ -1,3 +1,5 @@
+const views = require('../views/productView.js');
+
 const { getAuth, createUserWithEmailAndPassword , signInWithEmailAndPassword, signOut } = require('firebase/auth');
 
 const auth = getAuth();
@@ -7,9 +9,8 @@ function signInUser (req, res, next) {
     signInWithEmailAndPassword(auth, req.body.email, req.body.password)
       .then((userCredential) => {
           const user = userCredential.user;
-          console.log(`${user}`);
-          console.log(`${userCredential}`);
           console.log(`OK singin LOGIN`);
+          req.session.user = { email: req.body.email };
           next();
       })
       .catch((error) => {
@@ -17,6 +18,7 @@ function signInUser (req, res, next) {
           const errorMessage = error.message;
           console.log(`ERROR: ${errorCode} - ${errorMessage}`);
           return res.status(401).send('El email o la contraseña no son válidos.');
+          //return res.status(401).send(views.getWithoutProducts('El email o la contraseña no son válidos.', false));
       });
 }
 
@@ -29,29 +31,49 @@ function signUpUser (req, res, next) {
       .then((userCredential) => {
           const user = userCredential.user;
           console.log(`OK create LOGIN: ${user} - ${userCredential}`);
+          req.session.user = { email: req.body.email };
           next();
       })
       .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(`ERROR: ${errorCode} - ${errorMessage}`);
-          return res.status(422).send('Ha ocurrido algún problema con el login.');
-          //return res.status(401).send(views.getWithoutProducts('Ha ocurrido algún problema con el login.', false));
+          //return res.status(422).send(views.getWithoutProducts('Ha ocurrido algún problema con el login.', false));
+          return res.status(422).send( 'Ha ocurrido algún problema con el login.');
       });
       
   }
+
+  function statusUser (req, res, next) {
+    console.log('estoy en statusUser' );
+    console.log(req.session.user);
+  
+    try {
+      if (req.session && req.session.user) {
+        next();
+      } else {
+        res.status(401).send(views.getUserAccess('/singup'));
+      }
+    
+    } catch (error) {
+      return res.status(400).send('Ha ocurrido algún problema con el cierre de sesión.');
+    }
+  }
+
 
   function logoutUser (req, res, next) {
     try {
       if (auth.currentUser) {
         signOut(auth);
-        next();
       }
+      if (req.session && req.session.user) {
+        req.session.destroy();
+      }
+      next();
     } catch (error) {
       return res.status(400).send('Ha ocurrido algún problema con el cierre de sesión.');
     }
     
   }
 
-
-  module.exports = { signUpUser, signInUser, logoutUser };
+  module.exports = { signUpUser, signInUser, logoutUser, statusUser };

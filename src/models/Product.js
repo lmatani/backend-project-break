@@ -32,9 +32,14 @@ const Product = mongoose.model('Product', ProductSchema);
 const productValidationSchema = [
 	body('name')
     .notEmpty().withMessage('El nombre es un valor obligatorio')
-    .isString().withMessage('El nombre debe ser un texto'),
+    .isString().withMessage('El nombre debe ser un texto')
+    .isLength({ max: 50 })
+    .withMessage('El nombre no puede exceder los 50 caracteres.')
+    .trim(),
   body('description')
-    .isString().withMessage('La descripción debe ser un texto'),
+    .isString().withMessage('La descripción debe ser un texto').isLength({ max: 150 })
+    .withMessage('La descripción no puede exceder los 150 caracteres.')
+    .trim(),
   body('image')
     .notEmpty().withMessage('El campo imagen es un valor obligatorio')
     .isString().withMessage('La imagen debe ser un texto'),

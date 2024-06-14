@@ -18,7 +18,6 @@ function signInUser (req, res, next) {
           const errorMessage = error.message;
           console.log(`ERROR: ${errorCode} - ${errorMessage}`);
           return res.status(401).send('El email o la contraseña no son válidos.');
-          //return res.status(401).send(views.getWithoutProducts('El email o la contraseña no son válidos.', false));
       });
 }
 
@@ -38,7 +37,6 @@ function signUpUser (req, res, next) {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(`ERROR: ${errorCode} - ${errorMessage}`);
-          //return res.status(422).send(views.getWithoutProducts('Ha ocurrido algún problema con el login.', false));
           return res.status(422).send( 'Ha ocurrido algún problema con el login.');
       });
       

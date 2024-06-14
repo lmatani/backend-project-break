@@ -4,21 +4,18 @@ const singInButton = document.getElementById('sing-in');
 const signUpButton = document.getElementById('sing-up');
 const backButton = document.getElementById('back-main');
 
-//window.location.href = `/dashboard/category/${dataProduct.category}`;
 singInButton.addEventListener('click', (event) => {
     event.preventDefault();
-    console.log('estoy en  singInButton');
     singButton('/singin');
   });
 
 signUpButton.addEventListener('click', (event) => {
     event.preventDefault();
-    console.log('estoy en signUpButton');
     singButton('/singup');
   });
 
-  backButton.addEventListener('click', (event) => {
- event.preventDefault();
+backButton.addEventListener('click', (event) => {
+    event.preventDefault();
     window.location.href = `/products`;
   });
 
@@ -31,8 +28,7 @@ signUpButton.addEventListener('click', (event) => {
     } 
 
     try {
-      console.log(`estoy la función singButton en ${action}`);
-          const response = await fetch(`${action}`, {
+           const response = await fetch(`${action}`, {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'

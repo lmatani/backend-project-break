@@ -1,7 +1,7 @@
-//import { initializeApp } from "firebase/app";
+
 const { initializeApp }  = require('firebase/app');
 
-// Your web app's Firebase configuration
+// configuracion Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCNae-xCICskkycOzoimEHAlTdfVqloIIs",
   authDomain: "ejercicio-tienda-2024-lmn.firebaseapp.com",
@@ -11,6 +11,6 @@ const firebaseConfig = {
   appId: "1:593984276886:web:dbc4be7006d7a5c30975b7"
 };
 
-// Initialize Firebase
+// Initializar Firebase
 const app = initializeApp(firebaseConfig);
 module.exports = { app };

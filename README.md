@@ -5,7 +5,7 @@ El proyecto es una versión simplificada de una tienda de ropa que cuenta con un
 También se muestra un acceso para poder registrarse y de esta forma acceder al dashboard que permite la gestión de los productos: alta, modificación y borrado.
 
 
-## Instalción
+## Instalación
 1. Descargar el respositorio e instalarse las dependencias con el comando
 
 ```bash
@@ -23,6 +23,7 @@ Con la base de datos creada, obtenemos la url de conexión y habrá que guardarl
 MONGO_URI=<uri_bd_atlas>
 
 3. Incluir en el fichero .env las variables PORT y SECRET_KEY
+
 // .env
 
 PORT=8080

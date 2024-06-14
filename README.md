@@ -17,12 +17,16 @@ https://www.mongodb.com/atlas/database
 
 Una vez creada la cuenta, se debe crear un nuevo proyecto y ahí una nueva base de datos.
 Con la base de datos creada, obtenemos la url de conexión y habrá que guardarla en un archivo .env en la carpeta raíz del proyecto.
+
 // .env
+
 MONGO_URI=<uri_bd_atlas>
 
 3. Incluir en el fichero .env las variables PORT y SECRET_KEY
 // .env
+
 PORT=8080
+
 SECRET_KEY=<palabra_secreta>
 
 4. Arrancar el servidor desde el terminal

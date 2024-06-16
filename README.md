@@ -56,9 +56,6 @@ La autenticación se ha realizado con *Firebase* y *express-session*.
 He utilizado autenticación basada en correo electrónico y contraseña.
 Cualquier usuario puede navegar por los productos pero la parte de Dashboard solo puede gestionarla el adminstrador:
 
-Login y password para el administrador con firebase:
-
-*prueba_admin@gmail.com / admin123*
 
 
 Y el archivo **firebase.js** contiene la configuración para la conexión con firebase.
